@@ -39,8 +39,8 @@ Task("Pack").Does(() => {
 Task("Build-Docker")
     .IsDependentOn("Publish")
     .Does(() => {
-        PS.StartProcess($"docker build -t repo.treescale.com/wk/azure-docker:latest .");
-        PS.StartProcess($"docker tag repo.treescale.com/wk/azure-docker:latest repo.treescale.com/wk/azure-docker:{version}");
+        PS.StartProcess($"docker build -t azure-docker:latest .");
+        PS.StartProcess($"docker tag  azure-docker:latest repo.treescale.com/wk/azure-docker:{version}");
         PS.StartProcess($"docker push repo.treescale.com/wk/azure-docker:{version}");
         PS.StartProcess($"docker push repo.treescale.com/wk/azure-docker:latest");
     });
