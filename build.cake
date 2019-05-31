@@ -41,8 +41,9 @@ Task("Build-Docker")
     .Does(() => {
         PS.StartProcess($"docker build -t azure-docker:latest .");
         PS.StartProcess($"docker tag  azure-docker:latest repo.treescale.com/wk/azure-docker:{version}");
+        PS.StartProcess($"docker tag  azure-docker:latest repo.treescale.com/wk/azure-docker:latest");
         PS.StartProcess($"docker push repo.treescale.com/wk/azure-docker:{version}");
-        // PS.StartProcess($"docker push repo.treescale.com/wk/azure-docker:latest");
+        PS.StartProcess($"docker push repo.treescale.com/wk/azure-docker:latest");
     });
 
 var target = Argument("target", "Pack");
