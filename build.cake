@@ -39,11 +39,12 @@ Task("Pack").Does(() => {
 Task("Build-Docker")
     .IsDependentOn("Publish")
     .Does(() => {
-        PS.StartProcess($"docker build -t azure-docker:latest .");
-        PS.StartProcess($"docker tag  azure-docker:latest repo.treescale.com/wk/azure-docker:{version}");
-        PS.StartProcess($"docker tag  azure-docker:latest repo.treescale.com/wk/azure-docker:latest");
-        PS.StartProcess($"docker push repo.treescale.com/wk/azure-docker:{version}");
-        PS.StartProcess($"docker push repo.treescale.com/wk/azure-docker:latest");
+        var image = "azure-docker";
+        PS.StartProcess($"docker build -t {image}:latest .");
+        PS.StartProcess($"docker tag  {image}:latest repo.treescale.com/wk/{image}:{version}");
+        PS.StartProcess($"docker tag  {image}:latest repo.treescale.com/wk/{image}:latest");
+        PS.StartProcess($"docker push repo.treescale.com/wk/{image}:{version}");
+        PS.StartProcess($"docker push repo.treescale.com/wk/{image}:latest");
     });
 
 var target = Argument("target", "Pack");
